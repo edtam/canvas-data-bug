@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>原图</p>
+      <img id="img" src="./icon.jpg" alt="" />
+      <p>canvas</p>
+      <canvas id="canvas"></canvas>
+      <p>
+        <button id="btn">绘制</button>
+      </p>
+      <p>点击 绘制 两次, rgba 中 b 由 176 变成 177</p>
+      <section id="log"></section>
+    </div>
+
+    <script type="module" src="/main.js"></script>
+
+    <script>
+      const canvas = document.querySelector('#canvas')
+      const ctx = canvas.getContext('2d')
+
+      function draw() {
+        ctx.imageSmoothingEnabled = false
+        ctx.drawImage(img, 0, 0)
+      }
+
+      let count = 0
+      function logCanvasData() {
+        const { data } = ctx.getImageData(2, 0, 1, 1)
+        const arr = []
+        for (var i = 0; i < data.length; i++) {
+          arr.push(data[i])
+        }
+        const p = document.createElement('p')
+        p.innerHTML = `第${++count}次: rgba(${arr.join(', ')})`
+        document.querySelector('#log').appendChild(p)
+      }
+
+      function drawAndLog() {
+        draw()
+        logCanvasData()
+      }
+
+      const btn = document.querySelector('#btn')
+      btn.addEventListener('click', drawAndLog)
+    </script>
+  </body>
+</html>
