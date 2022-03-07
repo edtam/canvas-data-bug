@@ -8,15 +8,17 @@
   </head>
   <body>
     <div id="app">
-      <p>原图</p>
+      <h3>原图</h3>
       <img id="img" src="./icon.jpg" alt="" />
-      <p>canvas</p>
+
+      <h3>canvas</h3>
       <canvas id="canvas"></canvas>
       <p>
         <button id="btn">绘制</button>
       </p>
-      <p>点击 绘制 两次, rgba 中 b 由 176 变成 177</p>
+      <h3>点击 绘制 两次, rgba 中 b 由 176 变成 177</h3>
       <section id="log"></section>
+      <p>重现环境: windows-10, Chrome-99</p>
     </div>
 
     <script type="module" src="/main.js"></script>
@@ -37,9 +39,9 @@
         for (var i = 0; i < data.length; i++) {
           arr.push(data[i])
         }
-        const p = document.createElement('p')
-        p.innerHTML = `第${++count}次: rgba(${arr.join(', ')})`
-        document.querySelector('#log').appendChild(p)
+        const h3 = document.createElement('h3')
+        h3.innerHTML = `第${++count}次: rgba(${arr.join(', ')})`
+        document.querySelector('#log').appendChild(h3)
       }
 
       function drawAndLog() {
